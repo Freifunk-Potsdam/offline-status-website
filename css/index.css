@@ -56,6 +56,7 @@ body, html {
 .sidebar {
   height: 100%;
   display: none;
+  padding: 1em;
 }
 
 .open .sidebar {
@@ -84,3 +85,19 @@ body, html {
   display: table;
   width: 100%;
 }
+
+.routerList {
+  padding: 0.2em;
+}
+
+.routerList .router {
+  padding: 0.3em;
+}
+
+.routerList .router:hover {
+  background-color: lightgray;
+  border-radius: 0.2em;
+  /* cursor see https://www.w3schools.com/csSref/tryit.asp?filename=trycss_cursor */
+  cursor: grab;
+}
+

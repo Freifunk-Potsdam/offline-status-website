@@ -55,11 +55,11 @@ body, html {
 
 .sidebar {
   height: 100%;
-  display: table-cell;
+  display: none;
 }
 
 .open .sidebar {
-  
+  display: table-cell;
 }
 
 #sourceIp {

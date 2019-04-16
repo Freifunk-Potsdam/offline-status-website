@@ -1,28 +1,9 @@
-
-/* open and close the header */
-function toggleHeader() {
-  document.body.classList.toggle("open");
-  menuButton.innerText = document.body.classList.contains("open") ? "-" : "+";
-}
-
-function toggleSidebar(id) {
-  var sidebars = document.getElementsByClassName("sidebar");
-  for (var i = 0; i < sidebars.length; i++) {
-    var sidebar = sidebars[i];
-    if (sidebar.id == id) {
-      sidebar.classList.toggle("hidden");
-    } else {
-      sidebar.classList.add("hidden");
-    }
-  }
-}
-
-function loaded() {
-  toggleHeader();
-  toggleSidebar('routers');toggleSidebar('routers');
+/* Interfacing with OLSR JSON plugin
+ */
+window.addEventListener("load", function() {
   updateOLSR();
   setInterval(updateOLSR, 5000);
-}
+});
 
 function updateOLSR() {
   var request = new XMLHttpRequest();
@@ -44,22 +25,6 @@ function updateOLSR() {
      }
   });
   request.send();
-}
-
-function removeAllRoutersFromList() {
-  var routerLists = document.getElementsByClassName("routerList");
-  for (var i = 0; i < routerLists.length; i++) {
-    var routerList = routerLists[i];
-    routerList.innerHTML = "";
-  }
-}
-
-function displayRouter(router) {
-  var routerList = document.getElementById(router.type);
-  var routerElement = document.createElement("div");
-  routerElement.innerText = router.ip;
-  routerElement.classList.add("router");
-  routerList.appendChild(routerElement);
 }
 
 function listRouters(event) {
@@ -102,6 +67,4 @@ function listRouters(event) {
 }
 
 window.addEventListener("olsr", listRouters);
-
-window.addEventListener("load", loaded);
 

@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Freifunk Karte</title>
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <script type="text/javascript" src="js/index.js"></script>
+  </head>
+  <body>
+    <div id="header" class="js">
+      <a id="menuButton" class="element" onclick="javascript:toggleHeader()">+</a>
+      <a class="tab element" onclick="javascript:toggleSidebar('routerList')">Router</a>
+      <a class="tab element" onclick="javascript:toggleSidebar('config')">Config</a>
+    </div>
+    <div id="main">
+      <div id="config" class="sidebar">
+        Freifunk-Router:
+        <br/>
+        <input type="text" id="sourceIp" value="frei.funk" onchange="updateOLSR()" />
+      </div>
+      <div id="routerList" class="sidebar">
+      </div>
+      <div id="background">
+      </div>
+    </div>
+  </body>
+</html>
+

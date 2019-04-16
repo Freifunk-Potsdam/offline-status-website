@@ -1,0 +1,86 @@
+
+body {
+  padding: 0px;
+  margin: 0px;
+}
+
+body, html {
+  height: 100%;
+}
+
+#header {
+  background-color: transparent;
+  display: inline-block;
+  display: flex; /* see https://stackoverflow.com/a/19038859 */
+}
+
+.open #header {
+  width: 100%;
+  background-color: lightgray;
+}
+
+#menuButton {
+  background-color: lightgreen;
+  display: inline-block;
+  text-decoration: none;
+  color: darkgreen;
+  width: 1em;
+  border-bottom-right-radius: 0.4em;
+  position: fixed;
+}
+
+.open #menuButton {
+  border-bottom-right-radius: 0em;
+  position: static;
+}
+
+#header .element {
+  display: inline-block;
+  text-align: center;
+  padding: 0.5em;
+  font-size: 2em;
+}
+
+#header .element:hover {
+  background-color: gray;
+}
+
+#header .tab {
+  display: none;
+}
+
+.open #header .tab {
+  display: inline-block;
+}
+
+.sidebar {
+  height: 100%;
+  display: table-cell;
+}
+
+.open .sidebar {
+  
+}
+
+#sourceIp {
+  width: 8em;
+}
+
+.hidden {
+  display: none;
+}
+
+.open .hidden {
+  display: none;
+}
+
+#background {
+  background-color: lightblue;
+  display: table-cell;
+  width: 100%;
+}
+
+#main {
+  display: table;
+  width: 100%;
+}

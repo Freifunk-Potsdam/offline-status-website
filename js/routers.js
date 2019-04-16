@@ -14,11 +14,12 @@ function prepareRouterMenuEntryForMapInteraction(element, router) {
 
 function addVisibleRouter(ip, x, y) {
   withConfig(function(config){
-    config.visibleRouters[ip] = {
+    var router = config.visibleRouters[ip] = {
       ip: ip,
-      x: x || Math.floor(Math.random() * 100),
-      y: y || Math.floor(Math.random() * 100),
+      x: x || Math.random(),
+      y: y || Math.random(),
     };
+    setRouterVisibilityStatus(router);
   });
 }
 
@@ -27,12 +28,23 @@ function allowDrop(event) {
 }
 
 function dropOnBackground(event) {
+  var bbox = background.getBoundingClientRect();
+  var x = (event.x - bbox.left) / bbox.width;
+  // we can not get the height directly because it is a background image
+  var imagebbox = size.getBoundingClientRect();
+  var height = bbox.width / imagebbox.width * imagebbox.height;
+  var y = (event.y - bbox.top) / height;
   event.preventDefault();
   withConfig(function(config) {
     var ip = event.dataTransfer.getData("ip");
+    console.log(x, y, ip);
     if (ip) {
-      addVisibleRouter(ip, event.x, event.y);
+      addVisibleRouter(ip, x, y);
     }
   });
+}
+
+function displayRouter(ip) {
+  
 }
 

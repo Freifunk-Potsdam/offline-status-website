@@ -124,6 +124,7 @@ window.addEventListener("config", function(event){
       
       // place elements
       makeElementDraggableRouter(routerCircle, router, false);
+      makeElementDraggableRouter(routerText, router, false);
       updateRouterPosition(routerCircle);
     }
   });

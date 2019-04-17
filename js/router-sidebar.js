@@ -5,7 +5,7 @@ function getRouterListId(ip) {
   return "list-" + ip;
 }
 
-function displayRouter(router) {
+function listRouter(router) {
   var routerList = document.getElementById(router.type);
   var routerElement = document.createElement("a");
   routerElement.innerText = router.ip;
@@ -30,12 +30,10 @@ function setRouterVisibilityStatus(router) {
   if (!routerListElement) {
     return;
   }
-  withConfig(function(config){
-    if (config.visibleRouters[router.ip]) {
-      routerListElement.classList.add("visible");
-    } else {
-      routerListElement.classList.remove("visible");
-    }
-  });
+  if (routerIsVisible(router)) {
+    routerListElement.classList.add("visible");
+  } else {
+    routerListElement.classList.remove("visible");
+  }
 }
 

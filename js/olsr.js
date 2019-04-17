@@ -38,7 +38,7 @@ function listRouters(event) {
     ips.sort(function(a, b){return a.int - b.int;});
     ips.forEach(function(sortableIp){
       if (!ipsAdded.has(sortableIp.ip)) {
-        displayRouter(sortableIp);
+        listRouter(sortableIp);
         ipsAdded.add(sortableIp.ip);
       }
     });
@@ -50,6 +50,9 @@ function listRouters(event) {
       .reduce(function(a, b){return a * 256 + b;});
     return {ip:ip, type:type, int: int};
   }
+  // add ips
+  ipsToAdd.push(sortable(olsr.config.mainIpAddress, "this"));
+  pushRouters();
   olsr.neighbors.forEach(function (neighbor) {
     ipsToAdd.push(sortable(neighbor.ipAddress, "neighbor"));
   });

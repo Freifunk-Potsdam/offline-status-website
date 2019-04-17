@@ -10,8 +10,9 @@ body, html {
 
 #header {
   background-color: transparent;
-  display: inline-block;
-  display: flex; /* see https://stackoverflow.com/a/19038859 */
+  display: block;
+  /*display: flex; /* see https://stackoverflow.com/a/19038859 */
+  z-index: 500;
 }
 
 .open #header {
@@ -27,6 +28,7 @@ body, html {
   width: 1em;
   border-bottom-right-radius: 0.4em;
   position: fixed;
+  z-index: 500;
 }
 
 .open #menuButton {
@@ -56,10 +58,12 @@ body, html {
 .sidebar {
   display: none;
   padding: 1em;
+  /*background-color: rgba(1,1,1,0.3);*/
+  background-color: white;
 }
 
 .open .sidebar {
-  display: table-cell;
+  display: inline-block;
 }
 
 #sourceIp {
@@ -74,13 +78,21 @@ body, html {
   display: none;
 }
 
-#background {
-  display: table-cell;
+#map {
+  display: inline;
   width: 100%;
-  background: url("../map.png") no-repeat top right;
-  background-color: lightblue;
-  height: 100%;
-  background-size: 100% auto;
+  /*background: url("../map.png") no-repeat top right;*/
+  /*background-color: lightblue;*/
+  /*height: 100%;*/
+  /*background-size: 100% auto;*/
+  position: absolute;
+  /*top: 0px;*/
+  /*z-index: -200;*/
+}
+
+#mapRouters {
+  position: relative; /* for placement of routers see https://stackoverflow.com/a/105035 */
+  display: block;
 }
 
 #main {
@@ -107,12 +119,30 @@ body, html {
 }
 
 #size {
-  position: absolute;
+  /*position: absolute;*/
   width: 100%;
-  z-index: -100;
+  z-index: -600;
+  overflow: hidden;
+  
 }
 
 .routerList .router.visible {
-  background-color: lightgray;
+  background-color: lightgreen;
 }
 
+.routerList .router.visible:hover {
+  background-color: green;
+}
+
+
+#map .router {
+  width: 2em;
+  height: 2em;
+  background-color: green;
+  border-color: darkgreen;
+  border-radius: 2em;
+  border-width: 0.3 em;
+  border-style: solid;
+  position: absolute;
+  transform: translate(-50%, -50%); /* https://stackoverflow.com/a/16299904 */
+}

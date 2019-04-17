@@ -10,6 +10,7 @@
     <script type="text/javascript" src="js/routers.js"></script>
     <script type="text/javascript" src="js/olsr.js"></script>
     <script type="text/javascript" src="js/router-sidebar.js"></script>
+    <script type="text/javascript" src="js/utility.js"></script>
   </head>
   <body>
     <div id="header" class="js">
@@ -25,6 +26,8 @@
       </div>
       <div id="routers" class="sidebar">
         <!-- These lists are automatically filled. -->
+        Dieser Router:
+        <div id="this" class="routerList"></div>
         Nachbarn:
         <div id="neighbor" class="routerList"></div>
         Nahe Router:
@@ -32,8 +35,9 @@
         Andere Router:
         <div id="distant" class="routerList"></div>
       </div>
-      <div id="background" ondrop="dropOnBackground(event)" ondragover="allowDrop(event)">
+      <div id="map" ondrop="dropOnBackground(event)" ondragover="allowDrop(event)">
         <img id="size" src="map.png" />
+        <div id="mapRouters"></div>
       </div>
     </div>
     

@@ -38,12 +38,23 @@ function removeVisibleRouterWith(ip) {
   });
 }
 
-
 function allowDrop(event) {
   event.preventDefault();
 }
 
+function dropOnSidebar(event) {
+  var ip = event.dataTransfer.getData("ip");
+  if (!ip) {
+    return;
+  }
+  removeVisibleRouterWith(ip);
+}
+
 function dropOnBackground(event) {
+  var ip = event.dataTransfer.getData("ip");
+  if (!ip) {
+    return;
+  }
   var bbox = map.getBoundingClientRect();
   var x = (event.x - bbox.left) / bbox.width;
   // we can not get the height directly because it is a background image
@@ -51,13 +62,7 @@ function dropOnBackground(event) {
   var height = bbox.width / imagebbox.width * imagebbox.height;
   var y = (event.y - bbox.top) / height;
   event.preventDefault();
-  withConfig(function(config) {
-    var ip = event.dataTransfer.getData("ip");
-    console.log(x, y, ip);
-    if (ip) {
-      addVisibleRouterWith(ip, x, y);
-    }
-  });
+  addVisibleRouterWith(ip, x, y);
 }
 
 function updateRouterPosition(routerElement) {

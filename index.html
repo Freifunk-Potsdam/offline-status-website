@@ -24,7 +24,7 @@
         <br/>
         <input type="text" id="sourceIp" value="frei.funk" onchange="updateOLSR()" />
       </div>
-      <div id="routers" class="sidebar">
+      <div id="routers" class="sidebar" ondrop="dropOnSidebar(event)" ondragover="allowDrop(event)">
         <!-- These lists are automatically filled. -->
         Dieser Router:
         <div id="this" class="routerList"></div>

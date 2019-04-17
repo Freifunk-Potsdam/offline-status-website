@@ -77,6 +77,8 @@ function updateRouterSidebar(ip) {
     });
     connections.sort(function(a, b){return a.quality.etx - b.quality.etx});
     connections.forEach(addConnectionToRouterSidebar);
+    // fill routes
+    
   }
 }
 

@@ -101,6 +101,7 @@ window.addEventListener("config", function(event){
       }
     } else {
       // remove router
+      map.removeChild(routerElement.text);
       map.removeChild(routerElement);
     }
   }

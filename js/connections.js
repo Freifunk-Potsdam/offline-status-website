@@ -10,12 +10,8 @@ function renderConnectionsOnMap() {
     olsr.topology.forEach(function(link){
       if (routerIpIsVisible(link.destinationIP) && routerIpIsVisible(link.lastHopIP)) {
         var connections = [
-          createConnection(
-            link.destinationIP, link.lastHopIP,
-            link.linkQuality, link.tcEdgeCost),
-          createConnection(
-            link.lastHopIP, link.destinationIP,
-            link.neighborLinkQuality, link.tcEdgeCost),
+          createConnectionAsLastHop(link),
+          createConnectionAsDestination(link)
         ];
         connections.forEach(function(connection) {
           if (visibleConnections[connection.id]) {
@@ -68,17 +64,34 @@ function removeConnectionFromMap(connection) {
   delete visibleConnections[connection.id];
 }
 
-function createConnection(sourceIp, destinationIp, quality, cost) {
+function createConnectionAsDestination(link) {
+  return createConnection(
+    link.destinationIP, link.lastHopIP,
+    link.linkQuality, link.neighborLinkQuality,
+    link.tcEdgeCost);
+}
+
+function createConnectionAsLastHop(link) {
+  return createConnection(
+    link.lastHopIP, link.destinationIP,
+    link.neighborLinkQuality, link.linkQuality, 
+    link.tcEdgeCost);
+}
+
+function createConnection(sourceIp, destinationIp, linkQuality, neighborLinkQuality, cost) {
   return withConfig(function(config) {
+    var quality = getLinkQualityFromCost(cost);
+    quality.fromSourcetoDestination = linkQuality;
+    quality.fromDestinationToSource = neighborLinkQuality;
     return {
       id: sourceIp + "-" + destinationIp,
-      quality: quality,
-      cost: cost,
       source: config.visibleRouters[sourceIp],
+      sourceIp: sourceIp,
       destination: config.visibleRouters[destinationIp],
+      destinationIp: destinationIp,
       sourcePosition: getMapRouterPositionByIp(sourceIp),
       destinationPosition: getMapRouterPositionByIp(destinationIp),
-      quality: getLinkQualityFromCost(cost),
+      quality: quality,
     }
   });
 }
@@ -122,17 +135,24 @@ function getLinkQualityFromCost(cost) {
   if (cost < 2000) {
     quality.id = "very-good";
     quality.color = "#00cc00";
+    quality.text = "sehr gut";
   } else if (cost < 4000) {
     quality.id = "good";
     quality.color = "#ffcb05";
+    quality.text = "gut";
   } else if (cost < 10000) {
     quality.id = "still-usable";
     quality.color = "#ff6600";
+    quality.text = "nutzbar";
   } else {
     quality.id = "bad";
     quality.color = "#bb3333";
+    quality.text = "schlecht";
   }
-  quality.imageUrl = "img/connection/" + quality.id + ".png";
+  quality.image = {
+    connection: "img/connection/" + quality.id + ".png",
+    signal: "img/signal/" + quality.id + ".png",
+  };
   return quality;
 }
 

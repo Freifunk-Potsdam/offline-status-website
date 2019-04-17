@@ -105,13 +105,13 @@ body, html {
   padding: 0.2em;
 }
 
-.routerList .router {
+.routerList .router, #ips .ip {
   padding: 0.3em;
   display: block;
   text-decoration: none;
 }
 
-.routerList .router:hover {
+.routerList .router:hover, #ips .ip:hover {
   background-color: lightgray;
   border-radius: 0.2em;
   /* cursor see https://www.w3schools.com/csSref/tryit.asp?filename=trycss_cursor */
@@ -168,7 +168,7 @@ body, html {
   transform: translate(-50%, -50%); /* https://stackoverflow.com/a/16299904 */
 }
 
-.connection {
+#map .connection {
   position: absolute;
   height: 0px;
   border-width: 2px;
@@ -176,15 +176,66 @@ body, html {
   border-style: solid;
   z-index: 100;
 }
-.connection.bad {
+#map .connection.bad {
   border-color: #bb3333;
 }
-.connection.still-usable {
+#map .connection.still-usable {
   border-color: #ff6600;
 }
-.connection.good {
+#map .connection.good {
   border-color: #ffcb05;
 }
-.connection.very-good {
+#map .connection.very-good {
   border-color: #00cc00;
 }
+
+#router.sidebar .bad .ip {
+  background-color: #bb3333;
+}
+#router.sidebar .still-usable .ip {
+  background-color: #ff6600;
+}
+#router.sidebar .good .ip {
+  background-color: #ffcb05;
+}
+#router.sidebar .very-good .ip {
+  background-color: #00cc00;
+}
+#router.sidebar .ip,#router.sidebar .etx, #router.sidebar .lq {
+  width: 100%;
+  display: block;
+  padding-top: 0.2em;
+  padding-bottom: 0.2em;
+}
+#router.sidebar .etx img {
+  height: 1em;
+  vertical-align: middle;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+}
+#router.sidebar .bad {
+  border-color: #bb3333;
+}
+#router.sidebar .still-usable {
+  border-color: #ff6600;
+}
+#router.sidebar .good {
+  border-color: #ffcb05;
+}
+#router.sidebar .very-good {
+  border-color: #00cc00;
+}
+
+#router.sidebar .connection {
+  border-width: 0.3em;
+  border-style: solid;
+  border-radius: 0.3em;
+  margin-bottom: 0.3em;
+  text-align: center; 
+}
+#mid {
+  padding-top: 0.2em;
+  padding-bottom: 0.2em;
+}
+
+

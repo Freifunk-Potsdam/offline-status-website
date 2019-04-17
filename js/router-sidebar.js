@@ -12,7 +12,13 @@ function listRouter(router) {
   routerElement.classList.add("router");
   routerElement.id = getRouterListId(router.ip);
   routerElement.router = router;
-  makeElementDraggableRouter(routerElement, router, true);
+  makeElementDraggableRouter(routerElement, router, function() {
+    if (routerIsVisible(router)) {
+      removeVisibleRouterWith(router.ip);
+    } else {
+      addVisibleRouterWith(router.ip);
+    }
+  });
   routerList.appendChild(routerElement);
   setRouterVisibilityStatus(router);
 }

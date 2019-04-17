@@ -16,6 +16,11 @@ function toggleSidebar(id) {
   }
 }
 
+function sidebarIsVisible(id) {
+  var sidebar = document.getElementById(id);
+  return !sidebar.classList.contains("hidden");
+}
+
 window.addEventListener("load", function() {
   toggleHeader();
   toggleSidebar('routers');toggleSidebar('routers');

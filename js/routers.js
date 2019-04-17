@@ -1,20 +1,14 @@
 /* Positioning Routers
  */
  
-function makeElementDraggableRouter(element, router, addOnClick) {
+function makeElementDraggableRouter(element, router, onClick) {
   // making elements draggable, see https://www.w3schools.com/HTML/html5_draganddrop.asp
   element.draggable = true;
   element.ondragstart = function(event) {
     event.dataTransfer.setData("ip", router.ip);
   }
-  if (addOnClick) {
-    element.onclick = function() {
-      if (routerIsVisible(router)) {
-        removeVisibleRouterWith(router.ip);
-      } else {
-        addVisibleRouterWith(router.ip);
-      }
-    }
+  if (onClick) {
+    element.onclick = onClick;
   }
 }
 
@@ -77,6 +71,9 @@ function updateRouterPosition(routerElement) {
 
 function getMapRouterPositionByIp(ip) {
   var routerElement = document.getElementById("routerOnMap-" + ip);
+  if (!routerElement) {
+    return null;
+  }
   var routerBB = routerElement.getBoundingClientRect();
   var mapBB = map.getBoundingClientRect();
   return {
@@ -123,8 +120,11 @@ window.addEventListener("config", function(event){
       map.appendChild(routerText);
       
       // place elements
-      makeElementDraggableRouter(routerCircle, router, false);
-      makeElementDraggableRouter(routerText, router, false);
+      function clickRouter() {
+        openRouterSidebar(ip);
+      }
+      makeElementDraggableRouter(routerCircle, router, clickRouter);
+      makeElementDraggableRouter(routerText, router, clickRouter);
       updateRouterPosition(routerCircle);
     }
   });

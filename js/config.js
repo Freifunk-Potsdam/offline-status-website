@@ -41,8 +41,13 @@ function withConfig(func) {
 }
 
 function routerIsVisible(router) {
-  return Boolean(readConfig().visibleRouters[router.ip]);
+  return routerIpIsVisible(router.ip);
 }
+
+function routerIpIsVisible(ip) {
+  return Boolean(readConfig().visibleRouters[ip]);
+}
+
 
 function readConfig() {
   return withConfig(function(config){

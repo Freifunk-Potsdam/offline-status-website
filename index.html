@@ -11,6 +11,7 @@
     <script type="text/javascript" src="js/olsr.js"></script>
     <script type="text/javascript" src="js/router-sidebar.js"></script>
     <script type="text/javascript" src="js/utility.js"></script>
+    <script type="text/javascript" src="js/connections.js"></script>
   </head>
   <body>
     <div id="header" class="js">
@@ -35,7 +36,9 @@
         Andere Router:
         <div id="distant" class="routerList"></div>
       </div>
-      <div id="map" ondrop="dropOnBackground(event)" ondragover="allowDrop(event)">
+      <div id="map" ondrop="dropOnBackground(event)"
+           ondragover="allowDrop(event)"
+           onresize="displayConnections()">
         <img id="size" src="map.png" />
       </div>
     </div>

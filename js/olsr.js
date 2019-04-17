@@ -5,6 +5,8 @@ window.addEventListener("load", function() {
   setInterval(updateOLSR, 5000);
 });
 
+var olsr = null;
+
 function updateOLSR() {
   var request = new XMLHttpRequest();
   var url = "http://" + sourceIp.value + ":9090/all";
@@ -12,7 +14,7 @@ function updateOLSR() {
   request.addEventListener('load', function(event) {
      if (request.status >= 200 && request.status < 300) {
         try {
-          var olsr = JSON.parse(request.responseText);
+          olsr = JSON.parse(request.responseText);
           // see https://developer.mozilla.org/en-US/docs/Web/Guide/Events/Creating_and_triggering_events#Adding_custom_data_%E2%80%93_CustomEvent()
           var event = new CustomEvent("olsr", {detail: olsr});
           window.dispatchEvent(event);
@@ -67,6 +69,7 @@ function listRouters(event) {
     ipsToAdd.push(sortable(link.lastHopIP, "distant"));
   });
   pushRouters();
+  displayRelationsToRoutersOnMap();
 }
 
 window.addEventListener("olsr", listRouters);

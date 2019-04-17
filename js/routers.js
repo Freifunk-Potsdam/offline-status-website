@@ -1,17 +1,19 @@
 /* Positioning Routers
  */
  
-function makeElementDraggableRouter(element, router) {
+function makeElementDraggableRouter(element, router, addOnClick) {
   // making elements draggable, see https://www.w3schools.com/HTML/html5_draganddrop.asp
   element.draggable = true;
   element.ondragstart = function(event) {
     event.dataTransfer.setData("ip", router.ip);
   }
-  element.onclick = function() {
-    if (routerIsVisible(router)) {
-      removeVisibleRouterWith(router.ip);
-    } else {
-      addVisibleRouterWith(router.ip);
+  if (addOnClick) {
+    element.onclick = function() {
+      if (routerIsVisible(router)) {
+        removeVisibleRouterWith(router.ip);
+      } else {
+        addVisibleRouterWith(router.ip);
+      }
     }
   }
 }
@@ -23,6 +25,7 @@ function addVisibleRouterWith(ip, x, y) {
       ip: ip,
       x: x || (routerBefore ? routerBefore.x : Math.random()),
       y: y || (routerBefore ? routerBefore.y : Math.random()),
+      shortName: ip.split(/\./g)[3],
     };
     delete config.invisibleRouters[ip];
     setRouterVisibilityStatus(router);
@@ -66,8 +69,22 @@ function dropOnBackground(event) {
 }
 
 function updateRouterPosition(routerElement) {
-  routerElement.style.left = Math.floor(routerElement.router.x * 100) + "%";
-  routerElement.style.top = Math.floor(routerElement.router.y * 100) + "%";
+  [routerElement, routerElement.text].forEach(function(element) {
+    element.style.left = Math.floor(routerElement.router.x * 100) + "%";
+    element.style.top = Math.floor(routerElement.router.y * 100) + "%";
+  });
+}
+
+function getMapRouterPositionByIp(ip) {
+  var routerElement = document.getElementById("routerOnMap-" + ip);
+  var routerBB = routerElement.getBoundingClientRect();
+  var mapBB = map.getBoundingClientRect();
+  return {
+    x: routerBB.x - mapBB.x + routerBB.width / 2,
+    y: routerBB.y - mapBB.y + routerBB.height / 2,
+    width: routerBB.width,
+    height: routerBB.height,
+  };
 }
 
 window.addEventListener("config", function(event){
@@ -92,13 +109,22 @@ window.addEventListener("config", function(event){
   }
   forEachProperty(config.visibleRouters, function(ip, router){
     if (!updated.has(ip)) {
-      // add router
-      var routerElement = document.createElement("div");
-      routerElement.classList.add("router");
-      routerElement.router = router;
-      updateRouterPosition(routerElement);
-      makeElementDraggableRouter(routerElement, router);
-      map.appendChild(routerElement);
+      // create router circle
+      var routerCircle = document.createElement("div");
+      routerCircle.classList.add("router");
+      routerCircle.id = "routerOnMap-" + ip;
+      routerCircle.router = router;
+      map.appendChild(routerCircle);
+      // create router text
+      var routerText = document.createElement("span");
+      routerText.innerText = router.shortName;
+      routerText.classList.add("routerText");
+      routerCircle.text = routerText;
+      map.appendChild(routerText);
+      
+      // place elements
+      makeElementDraggableRouter(routerCircle, router, false);
+      updateRouterPosition(routerCircle);
     }
   });
 });

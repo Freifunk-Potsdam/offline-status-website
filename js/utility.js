@@ -15,3 +15,39 @@ function forEachProperty(obj, func) {
   });
 }
 
+function createLineAngle(x, y, length, angle, element) {
+    element = element || document.createElement("div");
+    // from https://stackoverflow.com/a/5912283/1320237
+    var styles = ''
+               /*+'border: 1px solid black; '*/
+               + 'width: ' + length + 'px; '
+               /*+ 'height: 0px; '*/
+               + '-moz-transform: rotate(' + angle + 'rad); '
+               + '-webkit-transform: rotate(' + angle + 'rad); '
+               + '-o-transform: rotate(' + angle + 'rad); '  
+               + '-ms-transform: rotate(' + angle + 'rad); '  
+               /*+ 'position: absolute; '*/
+               + 'top: ' + y + 'px; '
+               + 'left: ' + x + 'px; ';
+    element.setAttribute('style', styles);  
+    return element;
+}
+
+function createLine(x1, y1, x2, y2, element) {
+    // from https://stackoverflow.com/a/5912283/1320237
+    var a = x1 - x2,
+        b = y1 - y2,
+        c = Math.sqrt(a * a + b * b);
+
+    var sx = (x1 + x2) / 2,
+        sy = (y1 + y2) / 2;
+
+    var x = sx - c / 2,
+        y = sy;
+
+    var alpha = Math.PI - Math.atan2(-b, a);
+
+    return createLineAngle(x, y, c, alpha, element);
+}
+
+

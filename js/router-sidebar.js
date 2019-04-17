@@ -12,7 +12,7 @@ function listRouter(router) {
   routerElement.classList.add("router");
   routerElement.id = getRouterListId(router.ip);
   routerElement.router = router;
-  makeElementDraggableRouter(routerElement, router);
+  makeElementDraggableRouter(routerElement, router, true);
   routerList.appendChild(routerElement);
   setRouterVisibilityStatus(router);
 }
@@ -25,8 +25,12 @@ function removeAllRoutersFromList() {
   }
 }
 
+function getRouterListElementFromIp(ip) {
+  return document.getElementById(getRouterListId(ip));
+}
+
 function setRouterVisibilityStatus(router) {
-  var routerListElement = document.getElementById(getRouterListId(router.ip));
+  var routerListElement = getRouterListElementFromIp(router.ip);
   if (!routerListElement) {
     return;
   }
@@ -35,5 +39,13 @@ function setRouterVisibilityStatus(router) {
   } else {
     routerListElement.classList.remove("visible");
   }
+}
+
+function hideRelationToMap(ip) {
+  getRouterListElementFromIp(ip).classList.remove("hasNeighborOnMap");
+}
+
+function showRelationToMap(ip) {
+  getRouterListElementFromIp(ip).classList.add("hasNeighborOnMap");
 }
 

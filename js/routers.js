@@ -1,7 +1,7 @@
 /* Positioning Routers
  */
  
-function prepareRouterMenuEntryForMapInteraction(element, router) {
+function makeElementDraggableRouter(element, router) {
   // making elements draggable, see https://www.w3schools.com/HTML/html5_draganddrop.asp
   element.draggable = true;
   element.ondragstart = function(event) {
@@ -92,6 +92,7 @@ window.addEventListener("config", function(event){
       routerElement.classList.add("router");
       routerElement.router = router;
       updateRouterPosition(routerElement);
+      makeElementDraggableRouter(routerElement, router);
       map.appendChild(routerElement);
     }
   });

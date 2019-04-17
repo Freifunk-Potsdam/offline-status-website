@@ -12,7 +12,7 @@ function listRouter(router) {
   routerElement.classList.add("router");
   routerElement.id = getRouterListId(router.ip);
   routerElement.router = router;
-  prepareRouterMenuEntryForMapInteraction(routerElement, router);
+  makeElementDraggableRouter(routerElement, router);
   routerList.appendChild(routerElement);
   setRouterVisibilityStatus(router);
 }

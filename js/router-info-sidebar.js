@@ -26,7 +26,7 @@ function addConnectionToRouterSidebar(connection) {
   element.classList.add(connection.quality.id);
   element.classList.add("connection");
   // etx + image
-  var etxElement = document.createElement("div");
+  var etxElement = document.createElement("a");
   etxElement.innerText = "ETX: " + connection.quality.etx;
   etxElement.classList.add("etx");
   var imageElement = document.createElement("img");
@@ -34,6 +34,9 @@ function addConnectionToRouterSidebar(connection) {
   imageElement.alt = connection.quality.text;
   etxElement.appendChild(imageElement);
   element.appendChild(etxElement);
+  etxElement.onclick = function() {
+    openConnectionSidebar(connection);
+  }
   // ip
   var ipElement = document.createElement("a");
   ipElement.innerText = connection.destinationIp;
@@ -45,7 +48,7 @@ function addConnectionToRouterSidebar(connection) {
   // link quality
   var connectionElement = document.createElement("div");
   connectionElement.innerText =
-    "→" + connection.quality.fromSourcetoDestination + "→📡→" + 
+    "→" + connection.quality.fromSourceToDestination + "→📡→" + 
     connection.quality.fromDestinationToSource + "→";
   connectionElement.classList.add("lq");
   element.appendChild(connectionElement);

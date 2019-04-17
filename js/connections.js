@@ -1,6 +1,20 @@
 
 var visibleConnections = {};
 
+function getConnectionFromId(id) {
+  var ips = id.split("-");
+  var ip1 = ips[0];
+  var ip2 = ips[1];
+  var result = null;
+  olsr.topology.some(function(link){
+    if (link.destinationIP == ip1 && link.lastHopIP == ip2 ||
+        link.destinationIP == ip2 && link.lastHopIP == ip1) {
+      result = createConnectionAsDestination(link);
+    }
+  });
+  return result;
+}
+
 function renderConnectionsOnMap() {
   if (!olsr) {
     return; // startup
@@ -33,15 +47,18 @@ function renderConnectionsOnMap() {
 }
 
 function showConnectionOnMap(connection) {
-  var element = connection.element = document.createElement("div");
-  element.classList.add("connection");
-  element.classList.add(connection.quality.id);
+  var element = connection.element = document.createElement("a");
   map.appendChild(element);
   drawConnection(connection);
+  connection.element.onclick = function(){
+    var newConnection = getConnectionFromId(connection.id)
+    if (newConnection) {
+      openConnectionSidebar(newConnection);
+    }
+  }
 }
 
 function updateConnection(connection) {
-  console.log(connection);
   connection.element = visibleConnections[connection.id].element;
   visibleConnections[connection.id] = connection;
   drawConnection(connection);
@@ -55,6 +72,8 @@ function drawConnection(connection) {
     connection.destinationPosition.y,
     connection.element
   );
+  connection.element.className = "connection " + connection.quality.id +
+  " etx-" + connection.quality.etx;
 }
 
 function removeConnectionFromMap(connection) {
@@ -81,7 +100,7 @@ function createConnectionAsLastHop(link) {
 function createConnection(sourceIp, destinationIp, linkQuality, neighborLinkQuality, cost) {
   return withConfig(function(config) {
     var quality = getLinkQualityFromCost(cost);
-    quality.fromSourcetoDestination = linkQuality;
+    quality.fromSourceToDestination = linkQuality;
     quality.fromDestinationToSource = neighborLinkQuality;
     return {
       id: sourceIp + "-" + destinationIp,

@@ -13,6 +13,7 @@
     <script type="text/javascript" src="js/utility.js"></script>
     <script type="text/javascript" src="js/connections.js"></script>
     <script type="text/javascript" src="js/router-info-sidebar.js"></script>
+    <script type="text/javascript" src="js/connection-info-sidebar.js"></script>
   </head>
   <body>
     <div id="header" class="js">
@@ -44,6 +45,19 @@
         <div id="mid"></div>
         Routen:
         <div id="routes"></div>
+      </div>
+      <div id="connection" class="sidebar">
+        <div id="connectionWrapper">
+          <div id="connectionEtx"></div>
+          <div id="connectionSource" class="router"
+            onclick="openRouterFromElementText(this)"></div>
+          <div id="linkQuality">
+            ↑ <span id="lqFromDestination"></span> ↑
+            ↓ <span id="lqFromSource"></span> ↓
+          </div>
+          <div id="connectionDestination" class="router"
+            onclick="openRouterFromElementText(this)"></div>
+        </div>
       </div>
       <div id="map" ondrop="dropOnBackground(event)"
            ondragover="allowDrop(event)"

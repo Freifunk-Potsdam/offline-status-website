@@ -29,52 +29,7 @@ function updateOLSR() {
   request.send();
 }
 
-function listRouters(event) {
-  var olsr = event.detail;
-  removeAllRoutersFromList();
-  var ipsAdded = new Set();
-  var ipsToAdd = [];
-  function pushRouters() {
-    var ips = Array.from(ipsToAdd);
-    // sorting see https://www.w3schools.com/jsref/jsref_sort.asp
-    ips.sort(function(a, b){return a.int - b.int;});
-    ips.forEach(function(sortableIp){
-      if (!ipsAdded.has(sortableIp.ip)) {
-        listRouter(sortableIp);
-        ipsAdded.add(sortableIp.ip);
-      }
-    });
-    ipsToAdd = [];
-  }
-  function sortable(ip, type) {
-    var int = ip.split(".")
-      .map(function(x, index){return parseInt(x);})
-      .reduce(function(a, b){return a * 256 + b;});
-    return {ip:ip, type:type, int: int};
-  }
-  // add ips
-  ipsToAdd.push(sortable(olsr.config.mainIpAddress, "this"));
-  pushRouters();
-  olsr.neighbors.forEach(function (neighbor) {
-    ipsToAdd.push(sortable(neighbor.ipAddress, "neighbor"));
-  });
-  pushRouters();
-  olsr["2hop"].forEach(function (neighbor) {
-    neighbor.twoHopNeighbors.forEach(function(nextNeighbor) {
-      ipsToAdd.push(sortable(nextNeighbor.ipAddress, "twohop"));
-    });
-  });
-  pushRouters();
-  olsr.topology.forEach(function (link) {
-    ipsToAdd.push(sortable(link.lastHopIP, "distant"));
-  });
-  pushRouters();
-  displayRelationsToRoutersOnMap();
-}
-
 function isInternetGateway(ip) {
   return olsr && olsr.gateways.some(function(gateway){return gateway.ipAddress==ip;})
 }
-
-window.addEventListener("olsr", listRouters);
 

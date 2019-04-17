@@ -111,7 +111,7 @@ body, html {
   text-decoration: none;
 }
 
-.routerList .router:hover, #ips .ip:hover {
+.routerList .router:hover, #ips .ip:hover, #connectionDestination:hover, #connectionSource:hover {
   background-color: lightgray;
   border-radius: 0.2em;
   /* cursor see https://www.w3schools.com/csSref/tryit.asp?filename=trycss_cursor */
@@ -175,43 +175,48 @@ body, html {
 #map .connection {
   position: absolute;
   height: 0px;
-  border-width: 2px;
-  border-radius: 2px;
+  border-width: 0.2em;
+  border-radius: 0.2em;
   border-style: solid;
   z-index: 100;
 }
-#map .connection.bad {
+#map .connection.bad, #connectionWrapper.bad,
+    #router.sidebar .bad {
   border-color: #bb3333;
 }
-#map .connection.still-usable {
+#map .connection.still-usable, #connectionWrapper.still-usable,
+    #router.sidebar .still-usable {
   border-color: #ff6600;
 }
-#map .connection.good {
+#map .connection.good, #connectionWrapper.good,
+    #router.sidebar .good {
   border-color: #ffcb05;
 }
-#map .connection.very-good {
+#map .connection.very-good, #connectionWrapper.very-good,
+    #router.sidebar .very-good {
   border-color: #00cc00;
 }
 
-#router.sidebar .bad .ip {
+#router.sidebar .bad .ip, #connectionWrapper.bad #connectionEtx {
   background-color: #bb3333;
 }
-#router.sidebar .still-usable .ip {
+#router.sidebar .still-usable .ip, #connectionWrapper.still-usable #connectionEtx {
   background-color: #ff6600;
 }
-#router.sidebar .good .ip {
+#router.sidebar .good .ip, #connectionWrapper.good #connectionEtx {
   background-color: #ffcb05;
 }
-#router.sidebar .very-good .ip {
+#router.sidebar .very-good .ip, #connectionWrapper.very-good #connectionEtx {
   background-color: #00cc00;
 }
-#router.sidebar .ip,#router.sidebar .etx, #router.sidebar .lq {
+#router.sidebar .ip,#router.sidebar .etx, #router.sidebar .lq, #connectionEtx,
+    #connectionSource, #linkQuality, #connectionDestination {
   width: 100%;
   display: block;
   padding-top: 0.2em;
   padding-bottom: 0.2em;
 }
-#router.sidebar .ip:hover {
+#router.sidebar .ip:hover, #router.sidebar .etx:hover {
   background-color: lightgray;
 }
 #router.sidebar .etx img {
@@ -220,20 +225,8 @@ body, html {
   padding-left: 0.5em;
   padding-right: 0.5em;
 }
-#router.sidebar .bad {
-  border-color: #bb3333;
-}
-#router.sidebar .still-usable {
-  border-color: #ff6600;
-}
-#router.sidebar .good {
-  border-color: #ffcb05;
-}
-#router.sidebar .very-good {
-  border-color: #00cc00;
-}
 
-#router.sidebar .connection {
+#router.sidebar .connection, #connectionWrapper {
   border-width: 0.3em;
   border-style: solid;
   border-radius: 0.3em;
@@ -252,5 +245,3 @@ body, html {
   vertical-align: middle;
   padding-left: 0.3em;
 }
-
-

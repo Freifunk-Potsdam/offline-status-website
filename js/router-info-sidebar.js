@@ -18,6 +18,7 @@ function openRouterSidebar(ip) {
   }
   lastSelectedRouterIpForInfoSidebar = ip;
   updateRouterSidebar(ip);
+  openHeader();
 }
 
 function addConnectionToRouterSidebar(connection) {

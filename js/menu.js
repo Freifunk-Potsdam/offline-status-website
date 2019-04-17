@@ -1,7 +1,17 @@
 /* open and close the header */
+function headerIsOpen() {
+  return document.body.classList.contains("open");
+}
+
 function toggleHeader() {
   document.body.classList.toggle("open");
-  menuButton.innerText = document.body.classList.contains("open") ? "-" : "+";
+  menuButton.innerText = headerIsOpen() ? "-" : "+";
+}
+
+function openHeader() {
+  if (!headerIsOpen()) {
+    toggleHeader();
+  }
 }
 
 function toggleSidebar(id) {

@@ -13,8 +13,11 @@ function addRouterIp(ip) {
 }
 
 function openRouterSidebar(ip) {
-  toggleSidebar("router");
+  if (!sidebarIsVisible("router") || lastSelectedRouterIpForInfoSidebar == ip) {
+    toggleSidebar("router");
+  }
   lastSelectedRouterIpForInfoSidebar = ip;
+  updateRouterSidebar(ip);
 }
 
 function addConnectionToRouterSidebar(connection) {
@@ -34,6 +37,9 @@ function addConnectionToRouterSidebar(connection) {
   var ipElement = document.createElement("a");
   ipElement.innerText = connection.destinationIp;
   ipElement.classList.add("ip");
+  ipElement.onclick = function() {
+    openRouterSidebar(connection.destinationIp);
+  }
   element.appendChild(ipElement);
   // link quality
   var connectionElement = document.createElement("div");
@@ -43,6 +49,23 @@ function addConnectionToRouterSidebar(connection) {
   connectionElement.classList.add("lq");
   element.appendChild(connectionElement);
   mid.appendChild(element);
+}
+
+function addRouterHna(hna) {
+  var element = document.createElement("div");
+  element.innerText = hna.destination + "/" + hna.genmask;
+  element.classList.add("route");
+  routes.appendChild(element);
+}
+function addRouterGateway() {
+  var element = document.createElement("div");
+  element.innerText = "0.0.0.0/0"
+  element.classList.add("route");
+  element.classList.add("gateway");
+  var img = document.createElement("img");
+  img.src = "img/www.png";
+  element.appendChild(img);
+  routes.appendChild(element);
 }
 
 function updateRouterSidebar(ip) {
@@ -77,8 +100,17 @@ function updateRouterSidebar(ip) {
     });
     connections.sort(function(a, b){return a.quality.etx - b.quality.etx});
     connections.forEach(addConnectionToRouterSidebar);
+    // fill gateway in routes
+    routes.innerHTML = "";
+    if (isInternetGateway(ip)) {
+      addRouterGateway();
+    }
     // fill routes
-    
+    olsr.hna.forEach(function(hna){
+      if (hna.gateway == ip) {
+        addRouterHna(hna);
+      }
+    });
   }
 }
 

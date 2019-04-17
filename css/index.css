@@ -149,13 +149,17 @@ body, html {
   width: 2em;
   height: 2em;
   line-height: 2em;
-  background-color: green;
-  border-color: darkgreen;
+  background-color: white;
+  border-color: lightgreen;
   border-radius: 2em;
   border-width: 0.3 em;
   border-style: solid;
   position: absolute;
   transform: translate(-50%, -50%); /* https://stackoverflow.com/a/16299904 */
+}
+
+#map .router.internet {
+  background-color: lightgreen;
 }
 
 #map .routerText {
@@ -207,6 +211,9 @@ body, html {
   padding-top: 0.2em;
   padding-bottom: 0.2em;
 }
+#router.sidebar .ip:hover {
+  background-color: lightgray;
+}
 #router.sidebar .etx img {
   height: 1em;
   vertical-align: middle;
@@ -236,6 +243,14 @@ body, html {
 #mid {
   padding-top: 0.2em;
   padding-bottom: 0.2em;
+}
+#routes .route {
+  padding: 0.3em;
+}
+#routes .gateway img {
+  height: 1.5em;
+  vertical-align: middle;
+  padding-left: 0.3em;
 }
 
 

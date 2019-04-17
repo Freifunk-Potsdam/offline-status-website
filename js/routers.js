@@ -69,8 +69,12 @@ function updateRouterPosition(routerElement) {
   });
 }
 
+function getRouterElementFromIp(ip) {
+  return document.getElementById("routerOnMap-" + ip);
+}
+
 function getMapRouterPositionByIp(ip) {
-  var routerElement = document.getElementById("routerOnMap-" + ip);
+  var routerElement = getRouterElementFromIp(ip);
   if (!routerElement) {
     return null;
   }
@@ -119,7 +123,6 @@ window.addEventListener("config", function(event){
       routerText.classList.add("routerText");
       routerCircle.text = routerText;
       map.appendChild(routerText);
-      
       // place elements
       function clickRouter() {
         openRouterSidebar(ip);
@@ -127,6 +130,17 @@ window.addEventListener("config", function(event){
       makeElementDraggableRouter(routerCircle, router, clickRouter);
       makeElementDraggableRouter(routerText, router, clickRouter);
       updateRouterPosition(routerCircle);
+    }
+  });
+});
+
+window.addEventListener("olsr", function(event) {
+  forEachProperty(readConfig().visibleRouters, function(ip){
+    var routerElement = getRouterElementFromIp(ip);
+    if (isInternetGateway(ip)) {
+      routerElement.classList.add("internet");
+    } else {
+      routerElement.classList.remove("internet");
     }
   });
 });

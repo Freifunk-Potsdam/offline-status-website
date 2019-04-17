@@ -72,5 +72,9 @@ function listRouters(event) {
   displayRelationsToRoutersOnMap();
 }
 
+function isInternetGateway(ip) {
+  return olsr && olsr.gateways.some(function(gateway){return gateway.ipAddress==ip;})
+}
+
 window.addEventListener("olsr", listRouters);
 

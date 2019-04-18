@@ -57,17 +57,12 @@ function requestJSON(url, onSuccess, onError) {
   };
   request.open("GET", url);
   request.addEventListener('load', function(event) {
-     if (request.status >= 200 && request.status < 300) {
-        try {
-          var data = JSON.parse(request.responseText);
-          onSuccess(data);
-        } catch (e) {
-          console.warn(e);
-          console.warn(request.responseText);
-        }
-     } else {
-        onError(request);
-     }
+    if (request.status >= 200 && request.status < 300) {
+      var data = JSON.parse(request.responseText);
+      onSuccess(data);
+    } else {
+      onError(request);
+    }
   });
   request.send();
 }

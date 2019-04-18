@@ -6,6 +6,7 @@ window.addEventListener("load", function() {
 });
 
 var olsr = null;
+var failedRequests = 0;
 
 function updateOLSR() {
   requestJSON(getOlsrUrl(), function(data) {

@@ -128,7 +128,7 @@ function updateRouterSidebar(ip) {
   }
 }
 
-function useRouterAsSource() {
+function clickUseRouterAsSource() {
   if (lastSelectedRouterIpForInfoSidebar) {
     setSourceRouter(lastSelectedRouterIpForInfoSidebar);
   }

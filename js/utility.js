@@ -66,3 +66,38 @@ function requestJSON(url, onSuccess, onError) {
   });
   request.send();
 }
+
+/* Compatibility function because Firefox and Chromium differ.
+
+  map.getBoundingClientRect()
+    Chromium:
+      ClientRect {
+        bottom: 419,
+        height: 1037,
+        left: 165.03125,
+        right: 927,
+        top: -618,
+        width: 761.96875
+      }
+    Firefox
+      DOMRect {
+        x: 173.60000610351562,
+        y: -215,
+        width: 765.4000244140625,
+        height: 1041.683349609375,
+        top: -215, right: 939.0000305175781,
+        bottom: 826.683349609375,
+        left: 173.60000610351562
+      }
+ */
+function getBoundingBox(element) {
+  var bbox = element.getBoundingClientRect(element);
+  return {
+    x: bbox.left,
+    y: bbox.top,
+    width: bbox.width,
+    height: bbox.height
+  }
+}
+
+

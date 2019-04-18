@@ -102,7 +102,7 @@ function createConnection(sourceIp, destinationIp, linkQuality, neighborLinkQual
     var quality = getLinkQualityFromCost(cost);
     quality.fromSourceToDestination = linkQuality;
     quality.fromDestinationToSource = neighborLinkQuality;
-    return {
+    var connection = {
       id: sourceIp + "-" + destinationIp,
       source: config.visibleRouters[sourceIp],
       sourceIp: sourceIp,
@@ -112,6 +112,7 @@ function createConnection(sourceIp, destinationIp, linkQuality, neighborLinkQual
       destinationPosition: getMapRouterPositionByIp(destinationIp),
       quality: quality,
     }
+    return connection;
   });
 }
 
@@ -189,7 +190,7 @@ window.addEventListener("load", updateAllConnections);
 
 var width0 = null;
 function checkResize() {
-  var mapBB = map.getBoundingClientRect();
+  var mapBB = getBoundingBox(map);
   if (width0 != mapBB.width) {
     width0 = mapBB.width;
     // see https://developer.mozilla.org/en-US/docs/Web/Guide/Events/Creating_and_triggering_events#Adding_custom_data_%E2%80%93_CustomEvent()

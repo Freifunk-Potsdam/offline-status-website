@@ -52,12 +52,12 @@ function dropOnBackground(event) {
   if (!ip) {
     return;
   }
-  var bbox = map.getBoundingClientRect();
-  var x = (event.x - bbox.left) / bbox.width;
+  var bbox = getBoundingBox(map);
+  var x = (event.x - bbox.x) / bbox.width;
   // we can not get the height directly because it is a background image
-  var imagebbox = size.getBoundingClientRect();
+  var imagebbox = getBoundingBox(size);
   var height = bbox.width / imagebbox.width * imagebbox.height;
-  var y = (event.y - bbox.top) / height;
+  var y = (event.y - bbox.y) / height;
   event.preventDefault();
   addVisibleRouterWith(ip, x, y);
 }
@@ -78,8 +78,8 @@ function getMapRouterPositionByIp(ip) {
   if (!routerElement) {
     return null;
   }
-  var routerBB = routerElement.getBoundingClientRect();
-  var mapBB = map.getBoundingClientRect();
+  var routerBB = getBoundingBox(routerElement);
+  var mapBB = getBoundingBox(map);
   return {
     x: routerBB.x - mapBB.x + routerBB.width / 2,
     y: routerBB.y - mapBB.y + routerBB.height / 2,

@@ -128,6 +128,12 @@ function updateRouterSidebar(ip) {
   }
 }
 
+function useRouterAsSource() {
+  if (lastSelectedRouterIpForInfoSidebar) {
+    setSourceRouter(lastSelectedRouterIpForInfoSidebar);
+  }
+}
+
 function shouldUpdateRouterInfoSidebar() {
   return sidebarIsVisible("router") && lastSelectedRouterIpForInfoSidebar;
 }

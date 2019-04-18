@@ -254,3 +254,9 @@ body, html {
   display: block;
   padding-bottom: 0.5em;
 }
+
+#config a {
+  display: block;
+  text-align: center;
+  padding: 0.3em;
+}

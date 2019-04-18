@@ -1,0 +1,73 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="css/enable-headers.css">
+    <title>Router einrichten</title>
+  </head>
+  <body>
+    <h1>Router einrichten</h1>
+    <p>
+      Um die Karte in einem Netzerk zu verwenden,
+      muss ein einziger Router eingerichtet werden,
+      damit die Webseite die Daten von diesem Router
+      laden kann.
+    </p>
+    <ol>
+      <li>
+        Um die nötigen HTTP-Header im OLSR-JSON-Plugin einzuschalten,
+        logge Dich in den Router mit diesem Befehl ein:
+        <pre>ssh root@frei.funk</pre>
+      </li>
+      <li>
+        Editiere die Datei /etc/config/olsrd mit diesem Befehl:
+        <pre>vi /etc/config/olsrd</pre>
+        Drücke "i", um zu editieren und navigiere nach unten,
+        um die Zeile 
+        <pre>option httpheaders 'yes'</pre>
+        in die Konfiguration des JSON-INFO-Plugins einzufügen.
+        Meine Konfiguration sieht so aus:
+        <pre>config LoadPlugin
+        option accept '0.0.0.0'
+        option library 'olsrd_jsoninfo.so.0.0'
+        option ignore '0'
+        option httpheaders 'yes'</pre>
+      </li>
+      <li>
+        Schließe den Editor: Drücke ESC und tippe ":wq" und Enter.
+        Dann solltest Du wieder in der Konsole sein.
+      </li>
+      <li>
+        Starte den Router neu, z.B. mit dem Befehl:
+        <pre>reboot</pre>
+      </li>
+    </ol>
+    <p>
+      Nun solltest Du eine Anfrage senden können,
+      die mit HTTP-Headern beantwortet wird:
+      <a href="http://frei.funk:9090/config">http://frei.funk:9090/config</a>
+    </p>
+    <pre>HTTP/1.1 200 OK
+Date: Wed, 03 Apr 2019 12:32:57 GMT
+Server: OLSRD JSONInfo plugin
+Connection: closed
+Content-type: application/json
+Access-Control-Allow-Origin: *
+Access-Control-Allow-Methods: GET, POST, OPTIONS
+Access-Control-Allow-Headers: Accept, Origin, X-Requested-With
+Access-Control-Max-Age: 1728000
+Content-length: 3126
+Cache-Control: no-cache</pre>
+    <p>
+      Du kannst nun die IP deines Routers in der Konfiguration
+      der Karte eingeben.
+      Dann sollten Router aufgelistet werden.
+      Hier siehst Du ein Beispiel:
+      <br/>
+      <img src="img/example-routers.png" />
+      <br/>
+      <a href="index.html" class="back">Zurück zur Karte</a>
+    </p>
+  </body>
+</html>

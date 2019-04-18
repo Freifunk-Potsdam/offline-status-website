@@ -1,0 +1,18 @@
+
+p {
+  margin: 1em;
+  margin-bottom: 0px;
+}
+
+pre, back {
+  margin-left: 2em;
+  margin-right: 2em;
+}
+
+h1 {
+  text-align: center;
+}
+
+body {
+  max-width: 30em;
+}

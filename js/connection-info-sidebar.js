@@ -16,6 +16,7 @@ function openConnectionSidebar(connection) {
 function updateConnectionSidebar(connection) {
   console.log(connection.quality.etx, connection);
   connectionEtx.innerText = "ETX: " + connection.quality.etx;
+  connectionImage.src = connection.quality.image.signal;
   connectionWrapper.className = connection.quality.id;
   if (ipToInt(connection.sourceIp) < ipToInt(connection.destinationIp)) {
     lqFromDestination.innerText = connection.quality.fromDestinationToSource;

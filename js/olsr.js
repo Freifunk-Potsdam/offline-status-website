@@ -9,7 +9,8 @@ var olsr = null;
 
 function updateOLSR() {
   var request = new XMLHttpRequest();
-  var url = "http://" + sourceIp.value + ":9090/all";
+  var url = "http://" + sourceIp.value + 
+    (sourceIp.value.includes(":") ? "" : ":9090") + "/all";
   request.open("GET", url);
   request.addEventListener('load', function(event) {
      if (request.status >= 200 && request.status < 300) {

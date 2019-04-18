@@ -19,6 +19,16 @@ function openRouterSidebar(ip) {
   lastSelectedRouterIpForInfoSidebar = ip;
   updateRouterSidebar(ip);
   openHeader();
+  evaluateSource(ip);
+  updateRouterAsSourceStatus(ip);
+}
+
+function updateRouterAsSourceStatus(ip) {
+  if (isOlsrSource(ip)) {
+    useRouterAsSource.classList.remove("hidden");
+  } else {
+    useRouterAsSource.classList.add("hidden");
+  }
 }
 
 function addConnectionToRouterSidebar(connection) {
@@ -118,9 +128,20 @@ function updateRouterSidebar(ip) {
   }
 }
 
+function shouldUpdateRouterInfoSidebar() {
+  return sidebarIsVisible("router") && lastSelectedRouterIpForInfoSidebar;
+}
+
 window.addEventListener("olsr", function() {
-  if (sidebarIsVisible("router") && lastSelectedRouterIpForInfoSidebar) {
+  if (shouldUpdateRouterInfoSidebar()) {
     updateRouterSidebar(lastSelectedRouterIpForInfoSidebar);
   }
 });
+
+window.addEventListener("config", function() {
+  if (shouldUpdateRouterInfoSidebar()) {
+    updateRouterAsSourceStatus(lastSelectedRouterIpForInfoSidebar);
+  }
+});
+
 

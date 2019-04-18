@@ -66,8 +66,10 @@ body, html {
   display: inline-block;
 }
 
-#sourceIp {
-  width: 8em;
+#sourceRouterInput {
+  width: 9em;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
 }
 
 .hidden {
@@ -99,19 +101,23 @@ body, html {
   height: 100%;
 }
 
-.routerList {
+.routerList, #ips {
   padding: 0.2em;
 }
 
-.routerList .router, #ips .ip {
+.routerList .router, #ips .ip, #routerSources .source {
   padding: 0.3em;
   display: block;
   text-decoration: none;
 }
 
-.routerList .router:hover, #ips .ip:hover, #connectionDestination:hover, #connectionSource:hover {
+.routerList .router:hover, #ips .ip:hover,
+    #connectionDestination:hover, #connectionSource:hover,
+    #routerSources .source:hover {
   background-color: lightgray;
   border-radius: 0.2em;
+}
+.routerList .router:hover {
   /* cursor see https://www.w3schools.com/csSref/tryit.asp?filename=trycss_cursor */
   cursor: grab;
 }
@@ -242,4 +248,9 @@ body, html {
   height: 1.5em;
   vertical-align: middle;
   padding-left: 0.3em;
+}
+
+#useRouterAsSource {
+  display: block;
+  padding-bottom: 0.5em;
 }

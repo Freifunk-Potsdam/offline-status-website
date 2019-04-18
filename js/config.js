@@ -7,6 +7,7 @@ function initConfig(config) {
   config = typeof config == "object" ? config : {};
   config.visibleRouters = config.visibleRouters || {};
   config.invisibleRouters = config.invisibleRouters || {};
+  config.olsrSourceIps = config.olsrSourceIps || [];
   return config;
 }
 

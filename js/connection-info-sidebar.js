@@ -3,7 +3,6 @@
  
 var lastSelectedConnectionIdForInfoSidebar = null;
 
- 
 function openConnectionSidebar(connection) {
   if (!sidebarIsVisible("connection") ||
       lastSelectedConnectionIdForInfoSidebar == connection.id) {

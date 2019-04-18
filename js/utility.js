@@ -50,4 +50,24 @@ function createLine(x1, y1, x2, y2, element) {
     return createLineAngle(x, y, c, alpha, element);
 }
 
-
+function requestJSON(url, onSuccess, onError) {
+  var request = new XMLHttpRequest();
+  onError = onError || function() {
+    console.warn(request.statusText, request.responseText);
+  };
+  request.open("GET", url);
+  request.addEventListener('load', function(event) {
+     if (request.status >= 200 && request.status < 300) {
+        try {
+          var data = JSON.parse(request.responseText);
+          onSuccess(data);
+        } catch (e) {
+          console.warn(e);
+          console.warn(request.responseText);
+        }
+     } else {
+        onError(request);
+     }
+  });
+  request.send();
+}

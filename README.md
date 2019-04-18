@@ -20,8 +20,8 @@ Features:
 - Die Verbindungsstärke und die Hops bis zum Gateway werden angezeigt.
 - Es ist ausreichend, auf nur einem Router das JSON-info-Plugin zu konfigurieren.
 
-Links
------
+Weitere Links
+-------------
 
 - [Diskussion zur Einrichtung des JSON-Plugins](https://github.com/freifunk-berlin/firmware/issues/676)
 - [Gespräch über die Grundlagen dieser Karte](https://lists.berlin.freifunk.net/pipermail/berlin/2019-March/039316.html)

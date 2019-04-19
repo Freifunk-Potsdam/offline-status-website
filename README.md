@@ -3,6 +3,8 @@ Freifunk Berlin Offline Status Website
 
 **[Beispiel anzeigen][beispiel]** | **[Webseite anzeigen][web]** | **[Herunterladen]**
 
+![](img/example-website.png)
+
 Dieses Repository beinhaltet eine Kartographierung der Freifunk-Knoten
 der [Berliner Firmware][firmware] (OLSR 0.9.3 + JSON-info plugin).
 Das ist nützlich, um

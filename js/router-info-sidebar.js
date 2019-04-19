@@ -20,7 +20,6 @@ function openRouterSidebar(ip) {
   updateRouterSidebar(ip);
   openHeader();
   evaluateSource(ip);
-  updateRouterAsSourceStatus(ip);
 }
 
 function updateRouterAsSourceStatus(ip) {
@@ -126,6 +125,7 @@ function updateRouterSidebar(ip) {
       }
     });
   }
+  updateRouterAsSourceStatus(ip);
 }
 
 function clickUseRouterAsSource() {

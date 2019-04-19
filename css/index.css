@@ -255,8 +255,13 @@ body, html {
   padding-bottom: 0.5em;
 }
 
+#useRouterAsSource.hidden {
+  display: none;
+}
+
 #config a {
   display: block;
   text-align: center;
   padding: 0.3em;
 }
+

@@ -25,6 +25,8 @@ function openRouterSidebar(ip) {
 function updateRouterAsSourceStatus(ip) {
   if (isOlsrSource(ip)) {
     useRouterAsSource.classList.remove("hidden");
+    useRouterAsSource.innerText = (isSourceRouter(ip)) ?
+      "✓ ist Datenquelle": "als Datenquelle nutzen";
   } else {
     useRouterAsSource.classList.add("hidden");
   }
@@ -134,6 +136,7 @@ function updateRouterSidebar(ip) {
 function clickUseRouterAsSource() {
   if (lastSelectedRouterIpForInfoSidebar) {
     setSourceRouter(lastSelectedRouterIpForInfoSidebar);
+    updateRouterAsSourceStatus(lastSelectedRouterIpForInfoSidebar);
   }
 }
 

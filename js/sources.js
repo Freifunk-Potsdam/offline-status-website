@@ -17,6 +17,10 @@ function getSourceRouter() {
   return sourceRouterInput.value;
 }
 
+function isSourceRouter(ip) {
+  return getSourceRouter() == ip || olsr && olsr.config.mainIpAddress == ip;
+}
+
 function getOlsrUrl(ip) {
   var sourceRouter = ip || getSourceRouter() || defaultRouterSources[0].ip;
   var hasPort = sourceRouter.match(/:[0-9]+$/);

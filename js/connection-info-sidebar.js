@@ -10,6 +10,7 @@ function openConnectionSidebar(connection) {
   }
   lastSelectedConnectionIdForInfoSidebar = connection.id;
   updateConnectionSidebar(connection);
+  openHeader();
 }
 
 function updateConnectionSidebar(connection) {

@@ -89,5 +89,9 @@ function isOlsrSource(ip) {
   return readConfig().olsrSourceIps.includes(ip);
 }
 
+function showHowToEnableRouters() {
+  document.location = "enable-headers.html" + document.location.hash;
+}
+
 window.addEventListener("load", evaluateAllKnownSources);
 

@@ -26,16 +26,16 @@
     <div id="main">
       <div id="config" class="sidebar">
         Adresse des Freifunk-<br/>Routers als Datenquelle:
-        <br/>
         <input type="text" id="sourceRouterInput"
           onchange="updateOLSR()" />
         <div id="routerSources">
         </div>
         <hr/>
         Bildquelle:
-        <br/>
         <input type="text" id="mapImageInput" value="map.png"
           onchange="updateImageFromSidebar()" />
+        <input id="mapImageFileInput" type="file"
+          onchange="loadPictureFromFile()" />
         <hr/>
         <a href="javascript:showHowToEnableRouters()"
           class="centered">Router einrichten</a>

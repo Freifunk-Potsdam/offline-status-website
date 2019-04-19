@@ -17,6 +17,27 @@ window.setInterval(checkResize, 50);
 
 function updateImageFromSidebar() {
   setMapImage(mapImageInput.value);
+  mapImageFileInput.value = "";
+}
+
+function loadPictureFromFile() {
+  /* picture uploading, see
+     - https://stackoverflow.com/a/3814285
+     - https://stackoverflow.com/a/16153675 */
+  var files = mapImageFileInput.files;
+
+  // FileReader support
+  if (FileReader && files) {
+    if (files.length) {
+      var fileReader = new FileReader();
+      fileReader.onload = function () {
+        size.src = fileReader.result;
+      }
+      fileReader.readAsDataURL(files[0]);
+    }
+  } else {
+    hideFileInput();
+  }
 }
 
 function getMapImage() {
@@ -33,6 +54,16 @@ function updateMapImage() {
   size.src = getMapImage();
 }
 
-window.addEventListener("load", updateMapImage);
+function hideFileInput() {
+  mapImageFileInput.classList.add("hidden");
+}
+
 window.addEventListener("config", updateMapImage);
+window.addEventListener("load", function () {
+  if (!FileReader) {
+    hideFileInput();
+  }
+  loadPictureFromFile();
+  updateMapImage();
+});
 

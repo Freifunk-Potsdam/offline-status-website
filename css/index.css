@@ -66,10 +66,11 @@ body, html {
   display: inline-block;
 }
 
-#sourceRouterInput, #mapImageInput {
-  width: 12em;
+#config input {
+  width: 13em;
   margin-top: 0.5em;
   margin-bottom: 0.5em;
+  display: block;
 }
 
 .hidden {
@@ -255,7 +256,7 @@ body, html {
   padding-bottom: 0.5em;
 }
 
-#useRouterAsSource.hidden {
+#useRouterAsSource.hidden, #config input.hidden {
   display: none;
 }
 

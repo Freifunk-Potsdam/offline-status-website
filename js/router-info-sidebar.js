@@ -124,6 +124,9 @@ function updateRouterSidebar(ip) {
         addRouterHna(hna);
       }
     });
+    if (olsr.config.mainIpAddress == ip) {
+      olsr.config.hna.forEach(addRouterHna);
+    }
   }
   updateRouterAsSourceStatus(ip);
 }

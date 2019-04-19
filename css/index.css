@@ -266,3 +266,13 @@ body, html {
   padding: 0.3em;
 }
 
+.noConnection #menuButtonConfig, .noConnection #menuButton, .noConnection #sourceRouterInput {
+  background-color: red;
+  color: black;
+}
+
+.noConnection #menuButtonConfig:hover, .noConnection #header #menuButton:hover {
+  background-color: darkred;
+  color: black;
+}
+

@@ -51,10 +51,14 @@ function evaluateSource(ip, name) {
   });
 }
 
+var hasSource = false;
 function addSource(ip, name) {
+  hasSource = true;
+  document.body.classList.remove("noConnection");
   if (addedSourceIps.has(ip)) {
     return;
   }
+  name = name || ip;
   addedSourceIps.add(ip);
   var element = document.createElement("a");
   element.onclick = function() {
@@ -97,5 +101,22 @@ function showHowToEnableRouters() {
   document.location = "enable-headers.html" + document.location.hash;
 }
 
-window.addEventListener("load", evaluateAllKnownSources);
+// called by the input
+function sourceRouterChanged() {
+  updateOLSR();
+  evaluateSource(getSourceRouter());
+}
+
+window.addEventListener("load", function() {
+  evaluateAllKnownSources();
+  window.setTimeout(function(){
+    if (!hasSource) {
+      document.body.classList.add("noConnection");
+    }
+  }, 1000);
+});
+
+window.addEventListener("olsr", function(){
+  addSource(olsr.config.mainIpAddress);
+});
 

@@ -32,7 +32,6 @@ function sidebarIsVisible(id) {
 }
 
 window.addEventListener("load", function() {
-  toggleHeader();
   toggleSidebar('routers');toggleSidebar('routers');
 });
 

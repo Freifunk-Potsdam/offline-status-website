@@ -20,14 +20,16 @@
   <body>
     <div id="header" class="js">
       <a id="menuButton" class="element" onclick="javascript:toggleHeader()">+</a>
-      <a class="tab element" onclick="javascript:toggleSidebar('routers')">Router</a>
-      <a class="tab element" onclick="javascript:toggleSidebar('config')">Config</a>
+      <a class="tab element"
+        onclick="javascript:toggleSidebar('routers')">Router</a>
+      <a class="tab element" id="menuButtonConfig"
+        onclick="javascript:toggleSidebar('config')">Config</a>
     </div>
     <div id="main">
       <div id="config" class="sidebar">
         Adresse des Freifunk-<br/>Routers als Datenquelle:
         <input type="text" id="sourceRouterInput"
-          onchange="updateOLSR()" />
+          onchange="sourceRouterChanged()" />
         <div id="routerSources">
         </div>
         <hr/>

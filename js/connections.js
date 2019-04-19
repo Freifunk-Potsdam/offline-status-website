@@ -186,19 +186,5 @@ window.addEventListener("olsr", function(event){
 });
 window.addEventListener("config", updateAllConnections);
 window.addEventListener("load", updateAllConnections);
-
-
-var width0 = null;
-function checkResize() {
-  var mapBB = getBoundingBox(map);
-  if (width0 != mapBB.width) {
-    width0 = mapBB.width;
-    // see https://developer.mozilla.org/en-US/docs/Web/Guide/Events/Creating_and_triggering_events#Adding_custom_data_%E2%80%93_CustomEvent()
-    var event = new Event("resize");
-    window.dispatchEvent(event);
-  }
-}
-window.setInterval(checkResize, 50);
-
 window.addEventListener("resize", renderConnectionsOnMap);
 

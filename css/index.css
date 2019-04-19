@@ -66,8 +66,8 @@ body, html {
   display: inline-block;
 }
 
-#sourceRouterInput {
-  width: 9em;
+#sourceRouterInput, #mapImageInput {
+  width: 12em;
   margin-top: 0.5em;
   margin-bottom: 0.5em;
 }

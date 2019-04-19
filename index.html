@@ -15,6 +15,7 @@
     <script type="text/javascript" src="js/router-info-sidebar.js"></script>
     <script type="text/javascript" src="js/connection-info-sidebar.js"></script>
     <script type="text/javascript" src="js/sources.js"></script>
+    <script type="text/javascript" src="js/map.js"></script>
   </head>
   <body>
     <div id="header" class="js">
@@ -26,9 +27,15 @@
       <div id="config" class="sidebar">
         Adresse des Freifunk-<br/>Routers als Datenquelle:
         <br/>
-        <input type="text" id="sourceRouterInput" value="" onchange="updateOLSR()" />
+        <input type="text" id="sourceRouterInput"
+          onchange="updateOLSR()" />
         <div id="routerSources">
         </div>
+        <hr/>
+        Bildquelle:
+        <br/>
+        <input type="text" id="mapImageInput" value="map.png"
+          onchange="updateImageFromSidebar()" />
         <hr/>
         <a href="javascript:showHowToEnableRouters()"
           class="centered">Router einrichten</a>

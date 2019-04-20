@@ -23,13 +23,20 @@ function openRouterSidebar(ip) {
 }
 
 function updateRouterAsSourceStatus(ip) {
+  // data source text
   if (isOlsrSource(ip)) {
-    useRouterAsSource.classList.remove("hidden");
+    router.classList.add("dataSource");
     useRouterAsSource.innerText = (isSourceRouter(ip)) ?
       "✓ ist Datenquelle": "als Datenquelle nutzen";
   } else {
-    useRouterAsSource.classList.add("hidden");
+    router.classList.remove("dataSource");
   }
+  // fill connection to source
+  var quality = getRouteQualityTo(ip);
+  routerDataSourceEtx.classList.remove("hidden");
+  routerDataSourceEtx.innerText = "ETX: " + quality.etx;
+  quality.setClass(routerDataSourceEtx);
+  routerDataSourceQuality.innerText = quality.text;
 }
 
 function addConnectionToRouterSidebar(connection) {

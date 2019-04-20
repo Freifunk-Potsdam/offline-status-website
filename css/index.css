@@ -186,23 +186,28 @@ body, html {
   z-index: 100;
 }
 #map .connection.broken, #connectionWrapper.broken,
-    #router.sidebar .broken, #map .router.broken {
+    #router.sidebar .broken, #map .router.broken,
+    #routerDataSourceEtx.broken {
   border-color: #000000;
 }
 #map .connection.bad, #connectionWrapper.bad,
-    #router.sidebar .bad, #map .router.bad {
+    #router.sidebar .bad, #map .router.bad,
+    #routerDataSourceEtx.bad {
   border-color: #bb3333;
 }
 #map .connection.still-usable, #connectionWrapper.still-usable,
-    #router.sidebar .still-usable, #map .router.still-usable {
+    #router.sidebar .still-usable, #map .router.still-usable,
+    #routerDataSourceEtx.still-usable {
   border-color: #ff6600;
 }
 #map .connection.good, #connectionWrapper.good,
-    #router.sidebar .good, #map .router.good {
+    #router.sidebar .good, #map .router.good,
+    #routerDataSourceEtx.good {
   border-color: #ffcb05;
 }
 #map .connection.very-good, #connectionWrapper.very-good,
-    #router.sidebar .very-good, #map .router.very-good {
+    #router.sidebar .very-good, #map .router.very-good,
+    #routerDataSourceEtx.very-good {
   border-color: #00cc00;
 }
 
@@ -238,7 +243,7 @@ body, html {
   padding-right: 0.5em;
 }
 
-#router.sidebar .connection, #connectionWrapper {
+#router.sidebar .connection, #connectionWrapper, #routerDataSourceEtx {
   border-width: 0.3em;
   border-style: solid;
   border-radius: 0.3em;
@@ -263,7 +268,7 @@ body, html {
   padding-bottom: 0.5em;
 }
 
-#useRouterAsSource.hidden, #config input.hidden {
+#router.dataSource #useRouterAsSource, #router.dataSource #routerDataSourceConnection, #config input.hidden, #routerDataSourceEtx.broken {
   display: none;
 }
 
@@ -281,5 +286,9 @@ body, html {
 .noConnection #menuButtonConfig:hover, .noConnection #header #menuButton:hover {
   background-color: darkred;
   color: black;
+}
+
+#routerDataSourceQuality {
+  padding-bottom: 0.3em;
 }
 

@@ -268,8 +268,12 @@ body, html {
   padding-bottom: 0.5em;
 }
 
-#router.dataSource #useRouterAsSource, #router.dataSource #routerDataSourceConnection, #config input.hidden, #routerDataSourceEtx.broken {
+#useRouterAsSource, #router.dataSource #routerDataSourceConnection, #config input.hidden, #routerDataSourceEtx.broken {
   display: none;
+}
+
+#router.dataSource #useRouterAsSource {
+  display: block;
 }
 
 #config .centered {

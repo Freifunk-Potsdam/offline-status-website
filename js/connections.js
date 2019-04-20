@@ -116,6 +116,11 @@ function createConnection(sourceIp, destinationIp, linkQuality, neighborLinkQual
   });
 }
 
+function getBrokenConnection(id) {
+  var ips = id.split("-");
+  return createConnection(ips[0], ips[1], 0, 0, null);
+}
+
 function displayRelationsToRoutersOnMap() {
   if (!olsr) {
     return; // startup

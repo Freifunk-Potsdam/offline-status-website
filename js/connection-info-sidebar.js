@@ -40,6 +40,8 @@ window.addEventListener("olsr", function(){
     var connection = getConnectionFromId(lastSelectedConnectionIdForInfoSidebar);
     if (connection) {
       updateConnectionSidebar(connection);
+    } else {
+      updateConnectionSidebar(getBrokenConnection(lastSelectedConnectionIdForInfoSidebar));
     }
   }
 });

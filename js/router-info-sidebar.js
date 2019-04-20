@@ -34,7 +34,7 @@ function updateRouterAsSourceStatus(ip) {
 
 function addConnectionToRouterSidebar(connection) {
   var element = document.createElement("div");
-  element.classList.add(connection.quality.id);
+  connection.quality.setClass(element);
   element.classList.add("connection");
   // etx + image
   var etxElement = document.createElement("a");

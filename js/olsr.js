@@ -55,6 +55,18 @@ function isInternetGateway(ip) {
   return olsr && olsr.gateways.some(function(gateway){return gateway.ipAddress==ip;})
 }
 
+function getRouteTo(ip) {
+  var result = null;
+  if (olsr) {
+    olsr.routes.forEach(function(route){
+      if (route.destination == ip) {
+        result = route;
+      }
+    });
+  }
+  return result;
+}
+
 window.addEventListener("load", function() {
   olsrUpdated();
   olsrIntervalInput.value = olsrIntervalInput.value || updateIntervalInMilliseconds / 1000;

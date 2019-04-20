@@ -185,23 +185,30 @@ body, html {
   border-style: solid;
   z-index: 100;
 }
+#map .connection.broken, #connectionWrapper.broken,
+    #router.sidebar .broken, #map .router.broken {
+  border-color: #000000;
+}
 #map .connection.bad, #connectionWrapper.bad,
-    #router.sidebar .bad {
+    #router.sidebar .bad, #map .router.bad {
   border-color: #bb3333;
 }
 #map .connection.still-usable, #connectionWrapper.still-usable,
-    #router.sidebar .still-usable {
+    #router.sidebar .still-usable, #map .router.still-usable {
   border-color: #ff6600;
 }
 #map .connection.good, #connectionWrapper.good,
-    #router.sidebar .good {
+    #router.sidebar .good, #map .router.good {
   border-color: #ffcb05;
 }
 #map .connection.very-good, #connectionWrapper.very-good,
-    #router.sidebar .very-good {
+    #router.sidebar .very-good, #map .router.very-good {
   border-color: #00cc00;
 }
 
+#router.sidebar .broken .ip, #connectionWrapper.broken #connectionEtx {
+  background-color: #bb3333;
+}
 #router.sidebar .bad .ip, #connectionWrapper.bad #connectionEtx {
   background-color: #bb3333;
 }

@@ -130,18 +130,30 @@ window.addEventListener("config", function(event){
       makeElementDraggableRouter(routerCircle, router, clickRouter);
       makeElementDraggableRouter(routerText, router, clickRouter);
       updateRouterPosition(routerCircle);
+      updateRouterStyle(routerCircle);
     }
   });
 });
 
+function updateRouterStyle(ip) {
+  var routerElement = getRouterElementFromIp(ip);
+  if (!routerElement) {
+    return; // router invisible
+  }
+  // gateway
+  if (isInternetGateway(ip)) {
+    routerElement.classList.add("internet");
+  } else {
+    routerElement.classList.remove("internet");
+  }
+  // connection to source
+  var routeQuality = getRouteQualityTo(ip);
+  routeQuality.setClass(routerElement);
+}
+
 window.addEventListener("olsr", function(event) {
   forEachProperty(readConfig().visibleRouters, function(ip){
-    var routerElement = getRouterElementFromIp(ip);
-    if (isInternetGateway(ip)) {
-      routerElement.classList.add("internet");
-    } else {
-      routerElement.classList.remove("internet");
-    }
+    updateRouterStyle(ip);
   });
 });
 

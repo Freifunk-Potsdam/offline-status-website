@@ -72,8 +72,8 @@ function drawConnection(connection) {
     connection.destinationPosition.y,
     connection.element
   );
-  connection.element.className = "connection " + connection.quality.id +
-  " etx-" + connection.quality.etx;
+  connection.element.classList.add("connection");
+  connection.quality.setClass(connection.element);
 }
 
 function removeConnectionFromMap(connection) {
@@ -138,42 +138,6 @@ function displayRelationsToRoutersOnMap() {
       }
     });
   });
-}
-
-function getLinkQualityFromCost(cost) {
-  var quality = {
-    etx: cost / 1000,
-  };
-  /* this lookup is hardcoded on the page
-     http://frei.funk/cgi-bin/luci/freifunk/olsr/neighbors
-     olsr colors:
-     - bad: #bb3333
-     - still-usable: #ff6600
-     - good: #ffcb05
-     - very-good: #00cc00
-  */
-  if (cost < 2000) {
-    quality.id = "very-good";
-    quality.color = "#00cc00";
-    quality.text = "sehr gut";
-  } else if (cost < 4000) {
-    quality.id = "good";
-    quality.color = "#ffcb05";
-    quality.text = "gut";
-  } else if (cost < 10000) {
-    quality.id = "still-usable";
-    quality.color = "#ff6600";
-    quality.text = "nutzbar";
-  } else {
-    quality.id = "bad";
-    quality.color = "#bb3333";
-    quality.text = "schlecht";
-  }
-  quality.image = {
-    connection: "img/connection/" + quality.id + ".png",
-    signal: "img/signal/" + quality.id + ".png",
-  };
-  return quality;
 }
 
 function updateAllConnections() {

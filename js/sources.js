@@ -54,7 +54,6 @@ function evaluateSource(ip, name) {
 var hasSource = false;
 function addSource(ip, name) {
   hasSource = true;
-  document.body.classList.remove("noConnection");
   if (addedSourceIps.has(ip)) {
     return;
   }
@@ -111,9 +110,9 @@ window.addEventListener("load", function() {
   evaluateAllKnownSources();
   window.setTimeout(function(){
     if (!hasSource) {
-      document.body.classList.add("noConnection");
+      notifyConnectionLost();
     }
-  }, 1000);
+  }, failedUpdates.additionalMilliseconds);
 });
 
 window.addEventListener("olsr", function(){

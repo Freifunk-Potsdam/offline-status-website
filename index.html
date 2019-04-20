@@ -32,6 +32,10 @@
           onchange="sourceRouterChanged()" />
         <div id="routerSources">
         </div>
+        Die Webseite wird alle
+        <input type="number" value="5" min="0" id="olsrIntervalInput"
+          onchange="updateOlsrIntervalFrom(this)" />
+        Sekunden aktualisiert.
         <hr/>
         Bildquelle:
         <input type="text" id="mapImageInput" value="map.png"

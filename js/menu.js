@@ -31,6 +31,14 @@ function sidebarIsVisible(id) {
   return !sidebar.classList.contains("hidden");
 }
 
+function notifyConnectionLost() {
+  document.body.classList.add("noConnection");
+}
+
+function notifyConnectionEstablished() {
+  document.body.classList.remove("noConnection");
+}
+
 window.addEventListener("load", function() {
   toggleSidebar('routers');toggleSidebar('routers');
 });

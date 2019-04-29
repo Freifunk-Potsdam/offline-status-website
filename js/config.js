@@ -29,7 +29,6 @@ function withConfig(func) {
       var newData = encodeURIComponent(JSON.stringify(activeConfig));
       if (data != newData) {
         _fireConfigEvent(activeConfig);
-        console.log(activeConfig);
         document.location.hash = "#" + newData;
       }
       return result;

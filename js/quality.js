@@ -57,6 +57,6 @@ function getRouteQualityTo(ip) {
     return getLinkQualityFromCost(0);
   }
   var route = getRouteTo(ip);
-  return getLinkQualityFromCost(route && route.rtpMetricCost);
+  return getLinkQualityFromCost(isValidRoute(route) ? route.rtpMetricCost : null);
 }
 

@@ -67,6 +67,15 @@ function getRouteTo(ip) {
   return result;
 }
 
+function isValidRoute(route) {
+    /* valid:
+         { destination: "10.22.254.131", genmask: 32, gateway: "10.22.241.1", metric: 3, rtpMetricCost: 6906, networkInterface: "pdmvpn" }
+       invalid:
+         { destination: "10.22.254.129", genmask: 32, gateway: "0.0.0.0", metric: 0, rtpMetricCost: 0, networkInterface: "void" }
+     */
+    return route && route.gateway != "0.0.0.0";
+}
+
 window.addEventListener("load", function() {
   olsrUpdated();
   olsrIntervalInput.value = olsrIntervalInput.value || updateIntervalInMilliseconds / 1000;

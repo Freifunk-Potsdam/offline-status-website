@@ -52,7 +52,19 @@ function updateOLSR() {
 }
 
 function isInternetGateway(ip) {
-  return olsr && olsr.gateways.some(function(gateway){return gateway.ipAddress==ip;})
+  return olsr && (
+    olsr.gateways.some(function(gateway) {
+      return gateway.ipAddress==ip;}
+    ) || (
+      isSourceRouter(ip) &&
+      olsr.config.hna.some(isRouteToInternet)
+    ))
+}
+
+function isRouteToInternet(route) {
+  return isValidRoute(route) &&
+    route.destination == "0.0.0.0" &&
+    route.genmask == 0;
 }
 
 function getRouteTo(ip) {

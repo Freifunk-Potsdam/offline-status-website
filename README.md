@@ -1,5 +1,5 @@
-Freifunk Berlin Offline Status Website
-======================================
+Freifunk Offline Status Website
+===============================
 
 **[Beispiel anzeigen][beispiel]** | **[Webseite anzeigen][web]** | **[Herunterladen]**
 

@@ -17,7 +17,6 @@ window.setInterval(checkResize, 50);
 
 function updateImageFromSidebar() {
   setMapImage(mapImageInput.value);
-  mapImageFileInput.value = "";
 }
 
 function loadPictureFromFile() {
@@ -31,7 +30,7 @@ function loadPictureFromFile() {
     if (files.length) {
       var fileReader = new FileReader();
       fileReader.onload = function () {
-        size.src = fileReader.result;
+        setMapImage(fileReader.result);
       }
       fileReader.readAsDataURL(files[0]);
     }
@@ -59,11 +58,5 @@ function hideFileInput() {
 }
 
 window.addEventListener("config", updateMapImage);
-window.addEventListener("load", function () {
-  if (!FileReader) {
-    hideFileInput();
-  }
-  loadPictureFromFile();
-  updateMapImage();
-});
+window.addEventListener("load", updateMapImage);
 

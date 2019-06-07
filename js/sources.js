@@ -96,10 +96,6 @@ function isOlsrSource(ip) {
   return readConfig().olsrSourceIps.includes(ip);
 }
 
-function showHowToEnableRouters() {
-  document.location = "enable-headers.html" + document.location.hash;
-}
-
 // called by the input
 function sourceRouterChanged() {
   updateOLSR();

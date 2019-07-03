@@ -17,6 +17,7 @@ window.setInterval(checkResize, 50);
 
 function updateImageFromSidebar() {
   setMapImage(mapImageInput.value);
+  mapImageFileInput.value = "";
 }
 
 function loadPictureFromFile() {
@@ -30,13 +31,15 @@ function loadPictureFromFile() {
     if (files.length) {
       var fileReader = new FileReader();
       fileReader.onload = function () {
-        setMapImage(fileReader.result);
+        size.src = fileReader.result;
       }
       fileReader.readAsDataURL(files[0]);
+      return true;
     }
   } else {
     hideFileInput();
   }
+  return false;
 }
 
 function getMapImage() {
@@ -50,7 +53,9 @@ function setMapImage(url) {
 }
 
 function updateMapImage() {
-  size.src = getMapImage();
+  if (!loadPictureFromFile()) {
+    size.src = getMapImage();
+  }
 }
 
 function hideFileInput() {
